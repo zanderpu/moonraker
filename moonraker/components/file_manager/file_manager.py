@@ -922,8 +922,10 @@ class FileManager:
                 dest_path = upload_info['dest_path']
                 if upload_info["is_link"]:
                     dest_path = os.path.realpath(dest_path)
-                shutil.move(
-                    upload_info['tmp_file_path'], dest_path)
+                # shutil.move(
+                #     upload_info['tmp_file_path'], dest_path)
+                shutil.copyfile(upload_info['tmp_file_path'], dest_path)
+                os.remove(upload_info['tmp_file_path'])
                 finfo = self.get_path_info(upload_info['dest_path'],
                                            upload_info['root'])
         except Exception:
